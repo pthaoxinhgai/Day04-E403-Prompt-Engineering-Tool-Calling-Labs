@@ -40,6 +40,14 @@ def build_chat_model(
             temperature=temperature,
             google_api_key=os.getenv("GOOGLE_API_KEY"),
         )
+    if provider == "openai":
+        from langchain_openai import ChatOpenAI
+
+        return ChatOpenAI(
+            model=model_name or os.getenv("OPENAI_MODEL", "gpt-4.1-mini"),
+            temperature=temperature,
+            api_key=os.getenv("OPENAI_API_KEY"),
+        )
     if provider == "ollama":
         from langchain_ollama import ChatOllama
 
